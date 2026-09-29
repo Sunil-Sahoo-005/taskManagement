@@ -1,0 +1,2 @@
+all lirbaries are notedown here beacuse if i want to run thise project in any other system
+so it can help me what packages i should install!
