@@ -61,9 +61,15 @@ def update_task( task_id: int , body : Taskschema ,db:Session):
                 status_code=404,
                 detail="Task id not found"
             )
-    one_task.title = body.title
-    one_task.description = body.description
-    one_task.is_complete = body.is_complete
+    
+    # one_task.title = body.title
+    # one_task.description = body.description
+    # one_task.is_complete = body.is_complete
+
+    #shortcut for manual
+    body = body.model_dump()
+    for key , value in body.items():
+         setattr(one_task , key , value)
 
     db.add(one_task)
     db.commit()
