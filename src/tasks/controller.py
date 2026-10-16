@@ -5,7 +5,7 @@ from src.tasks.models import TaskModel
 from fastapi import HTTPException
 
 #AFTER COMPLETE LOGIC CONNECT TO ROUTE
-def create_task(body:Taskschema , db:Session):
+def create_task(body:Taskschema , db:Session,):
     #check
     # print(body.model_dump())
     data=body.model_dump()
@@ -26,15 +26,17 @@ def create_task(body:Taskschema , db:Session):
     db.commit()
     #COMMIT PE JO BHI DATA AAYEG WO TABLE PAI STORE HO JAYEGA
     db.refresh(new_task)
-    return{"status":"Task Created Successfully!","MSG":new_task}
+    return new_task
+# {"status":"Task Created Successfully!","MSG":new_task}
 
 
 def get_all_tasks(db:Session):
     tasks=db.query(TaskModel).all()
-    return{
-        "msg":"fetched all tasks",
-        "data":tasks
-    }
+    return tasks
+# {
+#         "msg":"fetched all tasks",
+#         "data":tasks
+#     }
 
 
 
@@ -47,10 +49,11 @@ def get_one_tasks(task_id: int, db: Session):
             detail="Task id not found"
         )
 
-    return {
-        "status": "data fetched successfully",
-        "data": one_task
-    }
+    return one_task
+# {
+#         "status": "data fetched successfully",
+#         "data": one_task
+#     }
 
 
 def update_task( task_id: int , body : Taskschema ,db:Session):
@@ -91,7 +94,8 @@ def delete_task(task_id: int , db:Session):
      db.delete(one_task)
      db.commit()
 
-     return {
-                 "status": "data deleted successfully",
-                 "data": one_task
-             }
+     return None
+# {
+#                  "status": "data deleted successfully",
+#                  "data": one_task
+#              }
